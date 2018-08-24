@@ -4,23 +4,61 @@ object gimenez {
 //	var property sueldo = 15000
 
 	var sueldo = 15000
+	var dinero=0
+	
 	method sueldo() { 
-		return 15000
+		return sueldo
 	}
 	method sueldo(nuevoValor) { 
-		sueldo = nuevoValor
+		sueldo=nuevoValor
+	}
+	method cobrarSueldo(){
+		dinero=dinero+sueldo
+	}
+	method totalCobrado(){
+		return dinero
 	}
 }
 
 object baigorria {
 	var cantidadEmpanadasVendidas = 100
 	var montoPorEmpanada = 15
+	var sueldo=15000
+	var deuda=0
+	var dinero=0
 	
 	method venderEmpanada() {
 		cantidadEmpanadasVendidas += 1
 	}
  	
 	method sueldo() = cantidadEmpanadasVendidas * montoPorEmpanada
+	method cobrarSueldo(){
+		sueldo=15000
+		if (sueldo>=deuda){
+			sueldo=sueldo-deuda
+			deuda=0
+		}
+		else{
+			deuda=deuda-sueldo
+			sueldo=0
+		}
+		dinero=dinero+sueldo
+	}
+	method gastar(cuanto){
+		if (dinero<cuanto){
+			deuda=deuda-(dinero-cuanto)
+			dinero=0
+		}
+			else{
+				dinero=dinero-cuanto	
+			}
+	}
+	method totalDeuda(){
+		return deuda
+	}
+	method totalDinero(){
+		return dinero
+	}
 }
 
 object galvan {
@@ -30,5 +68,6 @@ object galvan {
 	}
 	method pagarA( empleado ) { 
 		dinero -= empleado.sueldo()
+		empleado.cobrarSueldo()
 	}
 }
